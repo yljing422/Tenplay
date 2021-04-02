@@ -22,7 +22,7 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createTennisCourt = async (req, res, next) => {
     const geoData = await geocoder.forwardGeocode ({
-        query: req.body.campground.location,
+        query: req.body.tenniscourt.city,
         limit: 1
     }).send()
     const court = new TennisCourt(req.body.tenniscourt);

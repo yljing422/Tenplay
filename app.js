@@ -54,7 +54,7 @@ const bodyParser = require('body-parser');
 // const querystring = require('querystring');
 // const Article = require('./models').Article;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // use ejs-mate

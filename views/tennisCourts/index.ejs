@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 <div id="cluster-map" class="mb-3"></div>
 
-<form action="/tenniscourts/search" method="GET"></form>
+<form action="/tenniscourts/search" method="GET">
     <div class="input-group mb-3">
         <select class="form-select" id="search" name="find_by">
             <option value="name" selected>Search By...</option>
@@ -10,7 +10,7 @@
             <option value="zipcode">Zip Code</option>
         </select>
         <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
-        <button class="btn btn btn-success">Search</button>
+        <button class="btn btn-success">Search</button>
     </div>
 </form>
 
@@ -47,3 +47,9 @@
 </script>
 
 <script src="/javascripts/clusterMap.js"></script>
+<!-- <script>
+    function hello() {
+      alert('Hello');
+    }
+    document.getElementById("hello").addEventListener("click", hello);
+</script> -->

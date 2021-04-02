@@ -1,0 +1,49 @@
+<% layout('layouts/boilerplate') %>
+<div id="cluster-map" class="mb-3"></div>
+
+<form action="/tenniscourts/search" method="GET"></form>
+    <div class="input-group mb-3">
+        <select class="form-select" id="search" name="find_by">
+            <option value="name" selected>Search By...</option>
+            <option value="name">Court name</option>
+            <option value="city">City</option>
+            <option value="zipcode">Zip Code</option>
+        </select>
+        <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+        <button class="btn btn btn-success">Search</button>
+    </div>
+</form>
+
+<h1>All Tennis Courts</h1>
+<div>
+    <a href="/tenniscourts/new">Add Tennis Court</a>
+</div>
+<% for (let court of tennisCourts) { %>
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid" src="<%= court.image %>" alt="">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%= court.name %></h5>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <%= court.street %>, <%= court.city %>, <%= court.state %>
+                                        <%= court.zipcode %>
+                        </small>
+                    </p>
+                    <a class="btn btn-primary" href="/tenniscourts/<%= court._id %>">View <%= court.name %></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    // format the features to allow the mapbox to use
+    const tennisCourts = { features: <%- JSON.stringify(tennisCourts) %> };
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>

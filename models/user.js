@@ -8,7 +8,13 @@ const UserSchema = new Schema({
         type: String,
         require: true,
         unique: true
-    }
+    },
+    booking: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ],
 });
 
 // use passport-local-mongoose to add the password

@@ -73,7 +73,6 @@ module.exports.deleteTennisCourt = async (req, res) => {
 }
 
 module.exports.search = async(req, res) => {
-    console.log("qw")
     const find_by = req.query.find_by;
     const location = req.query.location;
     let result = await TennisCourt.find();

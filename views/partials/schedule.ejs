@@ -1,301 +1,311 @@
+  <!-- 
+  1. 切换court， refresh selection-part
+  2. form check case2.1 - check: disable rest of check box
+                case2.2 - uncheck: do nothing
+  3. fire api call 3.1: some url
+                   3.2: groung, address, court number, date, time
+ --> 
+
+ <!-- case1: change checked if it is from cur user
+ document.getElementById('MON-9').checked = true;
+ 
+ case2: otherwise, change disabled and className
+ document.getElementById('MON-9').disabled = true;
+ document.getElementById('MON-9').className += " disabled-checkbox"
+  
+
+  
+
+  Fire API call
+  const confirmedCourt = await fetch(url, {
+    method: "POST",
+    body: unitCourt,
+  });
+
+  Map each booking with API data
+  confirmedCourt = [Booking1, Booking2]
+  confirmedCourt.map(b => document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true)
+  for (let booking of bookings) {
+    if (booking.isSelf) {
+    document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true
+  } else {
+    document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).disabled = true
+    document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).value = 'whatever'
+  }
+  } -->
+
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<script>
+  window.unitCourt = "Court 1";
+
+  function onSelectCourtChange() {
+    unitCourt = document.getElementById('courtNumber').value;
+    document.getElementById('unitCourt').innerText = `${unitCourt}`;
+    // const month = new Date().getMonth();
+    // const day = new Date().getDate();
+    // const weekDay = new Date().getDay();
+    // console.log(month + 1, day, displayWeekDay(weekDay));
+
+    // console.log('selection: ', unitCourt)
+    // console.log('Date: ', new Date().toDateString())
+    // document.getElementById('date').innerHTML = displayWeekDay(new Date().getDay());
+    //renderSchedule(unitCourt);
+  }
+
+  function onRenderSchedule() {
+    const d = new Date();
+    const month = d.getMonth();
+    const day = d.getDate();
+    const weekDay = d.getDay();
+
+    renderTimePeriod(month, day);
+
+    for(let i = 0; i < 7; i++) {
+      renderDate(month+1, day + i, displayWeekDay((weekDay + i) % 7));
+    }
+    renderSchedule(month + 1, day, weekDay);
+  }
+
+  function renderTimePeriod(month, day) {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let dayth = "";
+    if (day === 1) {
+      dayth = "1st";
+    } else if (day === 2) {
+      dayth = "2nd";
+    } else if (day === 3) {
+      dayth = "3rd";
+    } else {
+      dayth = `${day}th`;
+    }
+    document.getElementById("time-period").innerHTML = `${months[month]} ${dayth} - ${months[month]} ${day+6}th`;
+  }
+
+  function renderDate(month, date, weekDay) {
+    let div1 = document.createElement("div");
+    let div2 = document.createElement("div");
+    div1.className = "col-md-1";
+    div2.className = "col-md-1";
+    div1.id = `${month}-${date}`;
+    div2.id = `${weekDay}`;
+    div1.innerText = `${month}/${date}`;
+    div2.innerText = `${weekDay}`;
+    document.getElementById("date-tag").appendChild(div1);
+    document.getElementById("weekday-tag").appendChild(div2);
+  }
+
+  function renderSchedule(month, date, weekDay) {
+    // let array = [];
+    // for (let i = 0; i < 10; i++) {
+    //   array[i] = [];
+    //   let time = (i + 9) % 12;
+    //   if (time === 0) {
+    //     time = 12;
+    //   }
+      const getDiv = document.getElementsByClassName("row-check");
+      // console.log(getDiv)
+      let time = 9;
+      let largeThan12 = false;
+      for (let rowDiv of getDiv) {
+        if (time === 0) {
+          time = 12;
+        } else if (time > 12) {
+          largeThan12 = true;
+          time = time - 12;
+        }
+        // console.log(rowDiv.attributes.value)
+        // console.log(time.toString())
+        // if (rowDiv.attributes.value === `${time}`) {
+          for (let j = 0; j < 7; j++) {
+            renderCheckbox(month, date + j, displayWeekDay((weekDay + j) % 7), time, rowDiv);
+            // <div class="col-md-1 form-check">
+            //   <input class="form-check-input" type="checkbox" value="" id='${date + j}-${i}-${j}'>
+            // </div>
+          }
+          if (largeThan12) {
+            time += 12 + 1;
+          } else {
+            time += 1;
+          }
+          
+        // }
+      }
+    // }
+  }
+  
+  function renderCheckbox(month, date, weekDay, time, rowDiv) {
+      let div = document.createElement("div");
+      div.className = "col-md-1 form-check";
+      let input = document.createElement("input");
+      input.className = "form-check-input";
+      input.type = "checkbox"
+      input.id = "defaultCheck1";
+      input.name = `${month}-${date}-${weekDay}-${time}`;
+      // input.onclick = onCheckboxClick();
+      div.appendChild(input);
+      // console.log(document.getElementById("row-check"));
+      rowDiv.appendChild(div);
+  }
+
+  function displayWeekDay(weekDay) {
+    switch (weekDay) {
+      case 0:
+        day = "Sun";
+        break;
+      case 1:
+        day = "Mon";
+        break;
+      case 2:
+        day = "Tue";
+        break;
+      case 3:
+        day = "Wed";
+        break;
+      case 4:
+        day = "Thu";
+        break;
+      case 5:
+        day = "Fri";
+        break;
+      case 6:
+        day = "Sat";
+    }
+    return day;
+  }
+
+  // window.flag = true
+  // function onCheckboxClick(id) {
+  //   const cur = document.getElementById(id)
+  //   const buttons = document.getElementsByClassName('form-check-input')
+  //   // after click -> checked
+  //   if (cur.checked) { 
+  //     for (let button of buttons) {
+  //       if (button.id != id) {
+  //           button.id = 'defaultCheck2'
+  //           button.disabled = true
+  //       }
+  //     }
+  //   // after click -> uncheck
+  //   } else {
+  //     for (let button of buttons) {
+  //       if (button.id != id) {
+  //         button.id = button.value === 'whatever' ? 'defaultCheck2' : 'defaultCheck1'
+  //         button.disabled = button.value === 'whatever' 
+  //       }
+  //     }
+  //   }
+  // }
+  
+</script>
+
+<div class="modal fade" id="exampleModalCenter" role="dialog" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
         <div class="modal-header">
           <div class="div">
-            <h5 class="modal-title" id="exampleModalLongTitle">Tennis Court Name</h5>
-            <p> March 1st - March 7t </p>
+            <h5 class="modal-title" id="exampleModalLongTitle"><%= court.name %></h5>
+            <p id="time-period"></p>
           </div>
           <!-- Small button groups (default and split) -->
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Small button
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+          <div class='selection-part'>
+          <div class="btn-group" >
+            <select class="form-select" id="courtNumber" name="booking[court]" onchange="onSelectCourtChange()">
+              <% for (let i = 1; i <= court.courtNum; i++) { %>
+                <option>Court <%= i %></option>
+              <% } %>
+            </select>
           </div>
-        
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
           <div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Default checkbox
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" disabled>
+              <label>
+                avaliable
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              <label class="form-check-label" for="defaultCheck2">
-                Disabled checkbox
+              <label >
+                booked
               </label>
             </div>
           </div>
         </div>
+          <div>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+        </div>
+
         <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
+          <div class="container-fluid" id="schedule-body">
+            <div class="row" id="date-tag">
               <div class="col-md-4"></div>
-              <div class="col-md-2">Mon</div>
-              <div class="col-md-2">Tue</div>
-              <div class="col-md-2">Wed</div>
-              <div class="col-md-2">Thu</div>
-              <div class="col-md-2">Fri</div>
-              <div class="col-md-2">Sat</div>
-              <div class="col-md-2">Sun</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">9 am - 10 am</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row" id="weekday-tag">
+              <div class="col-md-4"></div>
             </div>
-            <div class="row">
-              <div class="col-md-4">10 am - 11 am</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="9">9 am - 10 am</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">11 am - 12 pm</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="10">10 am - 11 am</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">12 pm - 1 pm</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="11">11 am - 12 pm</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">1 pm - 2 pm</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="12">12 pm - 1 pm</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">2 pm - 3 pm</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="1">1 pm - 2 pm</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">3 pm - 4 pm</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="2">2 pm - 3 pm</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">4 pm - 5 pm</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="3">3 pm - 4 pm</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">5 pm - 6 pm am</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="4">4 pm - 5 pm</div>
             </div>
-            <div class="row">
-              <div class="col-md-4">6 am - 7 am</div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
-              <div class="col-md-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-              </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="5">5 pm - 6 pm</div>
             </div>
+            <div class="row row-check">
+              <div class="col-md-4" id="row-check" value="6">6 am - 7 am</div>
+            </div>
+            <div id="test"></div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Comfirm</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirm</button>
         </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>You've booked your court at <br><%= court.name %></p>
+        <p><%= court.street %>, <%= court.city %>, <br><%= court.state %> <%= court.zipcode %></p>
+        <p id="unitCourt">Court 1</p>
+        <p>A comfirmation has sent to your email.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Cancel My Booking</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-target="#exampleModal">Confirm</button>
+      </div>
     </div>
   </div>
 </div>

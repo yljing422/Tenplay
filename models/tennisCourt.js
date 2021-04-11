@@ -40,6 +40,12 @@ const TennisCourtSchema = new Schema({
             ref: 'Review'
         }
     ],
+    schedules: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: 'Schedule'
+        }
+    ]
 }, opts);
 
 // add the properties' field

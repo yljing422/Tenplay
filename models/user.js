@@ -9,7 +9,7 @@ const UserSchema = new Schema({
         require: true,
         unique: true
     },
-    booking: [
+    bookings: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Booking'

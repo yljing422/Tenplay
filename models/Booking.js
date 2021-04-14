@@ -7,9 +7,10 @@ const BookingSchema = new Schema({
         ref: 'TennisCourt'
     },
     unitCourt: String,
-    date: String,
-    weekDay: String,
-    startTime: Number,
+    month: Number,
+    day: Number,
+    weekDay: Number,
+    time: Number,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

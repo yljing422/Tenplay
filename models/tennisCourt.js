@@ -40,10 +40,10 @@ const TennisCourtSchema = new Schema({
             ref: 'Review'
         }
     ],
-    schedules: [
+    bookings: [
         {
         type: Schema.Types.ObjectId,
-        ref: 'Schedule'
+        ref: 'Booking'
         }
     ]
 }, opts);

@@ -30,6 +30,7 @@ const User = require('./models/user');
 const usersRoutes = require('./routes/users')
 const tenniscourtsRoutes = require('./routes/tenniscourts');
 const reviewsRoutes = require('./routes/reviews');
+const bookingRoutes = require('./routes/booking');
 
 // use mongoose connect MongoDB
 mongoose.connect('mongodb://localhost:27017/ten-play', {
@@ -112,11 +113,16 @@ app.use((req, res, next) => {
 app.use('/', usersRoutes);
 app.use('/tenniscourts', tenniscourtsRoutes);
 app.use('/tenniscourts/:id/reviews', reviewsRoutes);
+app.use('/tenniscourts/:id/booking', bookingRoutes);
 
 // home page
 app.get('/', (req, res) => {
     res.render('home')
 });
+
+app.get('/booking', (req, res) => {
+    console.log('work')
+})
 
 // handle by 404 if no any route hitted
 app.all('*', (req, res, next) => {

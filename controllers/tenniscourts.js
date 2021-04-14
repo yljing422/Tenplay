@@ -1,5 +1,6 @@
 // import TennisCourt mongoose schema
 const TennisCourt = require('../models/tennisCourt');
+const Booking = require('../models/booking');
 // import mapbaox (npm install @mapbpx/mapbpx-sdk)
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
@@ -26,6 +27,7 @@ module.exports.createTennisCourt = async (req, res, next) => {
         limit: 1
     }).send()
     const court = new TennisCourt(req.body.tenniscourt);
+    console.log(req.body.tenniscourt)
     court.geometry = geoData.body.features[0].geometry;
     court.author = req.user._id;
     await court.save();
@@ -34,17 +36,32 @@ module.exports.createTennisCourt = async (req, res, next) => {
 }
 
 module.exports.showTennisCourt = async (req, res) => {
-    const court = await TennisCourt.findById(req.params.id).populate({
+    const court = await TennisCourt.findById(req.params.id).populate('bookings').populate({
         path: 'reviews',
         populate: {
             path: 'author'
         }
     });
-
+    const d = new Date();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const time = d.getHours();
+    // var filtered = array.filter(function(value, index, array){ 
+    //     return value > 5;
+    // });
+    const array = court.bookings;
+    let bookings = []
+    for (let ele of array) {
+        if (ele.month > month || (ele.month === month && ele.day >= day)) {
+            bookings.push(ele);
+        }
+    }
+    court.bookings = bookings;
     if (!court) {
         req.flash('error', 'Cannot find that tennis court!');
         return res.redirect('/tenniscourts');
     }
+    console.log(bookings)
     res.render('tennisCourts/show', { court });
 }
 

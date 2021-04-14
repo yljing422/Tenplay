@@ -27,7 +27,8 @@ module.exports.renderLogin = (req, res) => {
 
 module.exports.login = (req, res) => {
     req.flash('success', 'Welcome back!');
-    const redirectUrl = req.session.returnTo || '/tenniscourts';
+    // const redirectUrl = req.session.returnTo || '/tenniscourts';
+    const redirectUrl = '/tenniscourts';
     delete req.session.returnTo;
     res.redirect(redirectUrl);
 }

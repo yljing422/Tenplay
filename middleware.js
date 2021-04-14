@@ -61,3 +61,15 @@ module.exports.validateReview = (req, res, next) => {
         next();
     }
 }
+
+// use joi schema validation to check the error
+module.exports.validateBooking = (req, res, next) => {
+    console.log(req.body);
+    const { error } = bookingSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join('.');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+}

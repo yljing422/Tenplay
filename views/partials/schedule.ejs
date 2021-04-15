@@ -33,9 +33,11 @@
   let done = false;
 
   function onSelectCourtChange(bookings) {
+    cancelPreviousSchedule(bookings, unitCourt);
     unitCourt = document.getElementById('courtNumber').value;
     document.getElementById('unitCourt1').innerText = `${unitCourt}`;
     document.getElementById('unitCourt2').value = `${unitCourt}`;
+    cancelPreviousSchedule(bookings, unitCourt);
     addBookedSchedule(bookings, unitCourt);
     // const month = new Date().getMonth();
     // const day = new Date().getDate();
@@ -202,6 +204,23 @@
       grid[0].disabled = true;
     }
   }
+
+  function cancelPreviousSchedule(bookings, unitCourt) {
+    let unitCourtBookings = []
+    for (let booking of bookings) {
+      if (booking.unitCourt === unitCourt) {
+        unitCourtBookings.push(booking);
+      }
+    }
+    for (booking of unitCourtBookings) {
+      const name = `${booking.month}-${booking.day}-${booking.weekDay}-${booking.time}`;
+      const grid = document.getElementsByName(name);
+      grid[0].id = 'defaultCheck1';
+      grid[0].value = '';
+      grid[0].disabled = false;
+    }
+  }
+
     
 
   // confirmedCourt.map(b => document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true)

@@ -45,10 +45,7 @@ module.exports.showTennisCourt = async (req, res) => {
     const d = new Date();
     const month = d.getMonth() + 1;
     const day = d.getDate();
-    const time = d.getHours();
-    // var filtered = array.filter(function(value, index, array){ 
-    //     return value > 5;
-    // });
+    // const time = d.getHours();
     const array = court.bookings;
     let bookings = []
     for (let ele of array) {

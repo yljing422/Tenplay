@@ -1,0 +1,72 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+<div class="container-serach">
+    <img class="" src="../photos/logo.png" alt="" height="120px">
+
+    <form class="index-search" action="/tenniscourts/search" method="GET">
+        <div class="input-group mb-3">
+            <select class="form-select" id="search" name="find_by">
+                <option value="name" selected>Search By...</option>
+                <option value="name">Court name</option>
+                <option value="city">City</option>
+                <option value="zipcode">Zip Code</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+            <button class="btn btn-success">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="show-background"></div>
+<div class="floating-card">
+    <img class="mb-3" src="https://www.humanesociety.org/sites/default/files/styles/1240x698/public/2020-07/kitten-510651.jpg?h=f54c7448&itok=ZhplzyJ9" alt="photo" style='height: 100px; width: 200px'>
+    <div class="row">
+        <div class="col-12">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="home">Bookings</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Reviews</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Bookmarks</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Friends</a>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row user-bookings">
+    <div class="col-4">
+    </div>
+    <div class="col-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <% for (let booking of user.bookings) { %>
+                <% if (booking.day > new Date().getDate() || booking.day === new Date().getDate() && booking.time > new Date().getHours()) { %>
+                    <div class="card mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= booking.ground.name %></h5>
+                                    <p class="card-text"><%= booking.unitCourt %></p>
+                                    <div class="date">
+                                        <p class="card-text">April <%= booking.day %>, 2021</p>
+                                    </div>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            <%= booking.time %>:00
+                                        </small>
+                                    </p>
+                                    <a class="btn btn-primary" href="">Get Direction</a>
+                                    <form class="d-inline" action="/tenniscourts/<%= booking.ground._id %>/booking/<%= booking._id %>?_method=DELETE" method="POST">
+                                        <button class="btn btn-danger">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">2</div>
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">3</div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">4</div>
+      </div>
+    </div>
+  </div>

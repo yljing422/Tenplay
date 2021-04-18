@@ -1,6 +1,23 @@
 <% layout('layouts/boilerplate') %>
     <link rel="stylesheet" href="/stylesheets/stars.css">
+    <div class="container-serach">
+        <img class="" src="../photos/logo.png" alt="" height="120px">
     
+        <form class="index-search" action="/tenniscourts/search" method="GET">
+            <div class="input-group mb-3">
+                <select class="form-select" id="search" name="find_by">
+                    <option value="name" selected>Search By...</option>
+                    <option value="name">Court name</option>
+                    <option value="city">City</option>
+                    <option value="zipcode">Zip Code</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+                <button class="btn btn-success">Search</button>
+            </div>
+        </form>
+    </div>
+
+    </div>
 
     <div class="row">
         <div class="col-6 mb-3">

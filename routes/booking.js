@@ -17,4 +17,6 @@ const ExpressError = require('../utils/ExpressError');
 
 router.post('/', isLoggedIn, catchAsync(booking.createBooking));
 
+router.delete('/:bookingId', isLoggedIn, catchAsync(booking.deleteBooking));
+
 module.exports = router;

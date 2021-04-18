@@ -20,3 +20,15 @@ module.exports.createBooking = async (req, res) => {
     req.flash('success', 'Booking successful!');
     res.redirect(`/tenniscourts/${court._id}`);
 }
+
+
+module.exports.deleteBooking = async(req, res) => {
+    const { id, bookingId } = req.params;
+    const booking = await Booking.findById(bookingId);
+    userId = booking.user._id
+    await TennisCourt.findByIdAndUpdate(id, { $pull: { bookings: bookingId } });
+    await User.findByIdAndUpdate(userId, { $pull: { bookings: bookingId } });
+    await Booking.findByIdAndDelete(bookingId);
+    req.flash('success', 'Successfully deleted the booking');
+    res.redirect(`/user/${userId}`);
+}

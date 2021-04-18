@@ -1,7 +1,7 @@
 /* map */
 #cluster-map {
     width: 100%;
-    height: 500px;
+    height: 300px;
 }
 
 #map {
@@ -10,13 +10,77 @@
 }
 
 /* nav bar */
-.link {
-   
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
+.navbar {
+    background: #24424C;
+}
+
+/* home page */
+.container-logo {
+    text-align: center;
+    height: 100%;
+}
+
+.home-logo {
+    padding-bottom: 50px;
+    height:18%;
+}
+
+.container-home-photo {
+    display: flex;
+}
+
+.container-home-search {
+    padding-bottom: 150px;
+}
+
+/* tenniscourt page */
+.container-serach {
+    display: flex;
+}
+
+.index-search {
+    width: 100%;
+    align-self: center;
+}
+
+.courts-image {
+    height: 250px;
+    width: 350px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.show-court-button {
+    align-self: flex-end;
+}
+
+/* show page */
+.show-background {
+    background-color: rgba(133, 207, 79, 0.5);
+    height: 150px;
+}
+
+/* user page */
+.floating-card {
+    /* fixed style
+    position: fixed;
+    padding-top: 40px; */
+
+    /* absolute style */
+    position: absolute;
+    padding-top: 40px; 
+}
+.show-background {
+    position:absolute;
+    left: 0;
+    right: 0;
+}
+
+.user-bookings {
+    padding-top: 200px;
 }
 
 /* pop up */
@@ -24,9 +88,28 @@
     max-width: 600px;
 }
 
+.close-button {
+    right: 10px;
+    top: 10px;
+    position: absolute;
+}
 
+.selection-part {
+    display: flex;
+    width: 45%;
+    justify-content: space-between;
+    padding-top: 28px;
+    padding-right: 15px;    
+}
 
-
+.court-selector {
+    width: 90px;
+    height: 30px;
+    margin-left: 30px;
+    font-size: 14px;
+    padding: 0;
+    padding-left: 7px;
+}
 
 .disabled-checkbox {
     background: #C4C4C4;
@@ -34,4 +117,86 @@
 
 #defaultCheck2 {
     background: #C4C4C4;
+}
+
+.zero-padding {
+    padding: 0;
+}
+
+.date-font {
+    font-size: 13px;
+    color: white;
+}
+
+.week-font {
+    font-size: 12px;
+    padding-left: 6px;
+    color: white;
+}
+
+.schedule-background {
+    background-color: rgba(133, 207, 79, 0.5);
+    padding: 25px;
+    padding-left: 26px;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.schedule-time-period {
+    text-align: center;
+}
+
+.row-check {
+    padding: 5px 0;
+}
+
+.grid-check {
+  padding-left: 28px;
+}
+
+.no-left-right-border {
+    border-left: unset;
+    border-right: unset;
+    border-bottom: unset;
+    border-radius: 0;
+}
+
+.pd-5 {
+    padding: 25px;
+
+}
+
+/* sign-in */
+.sign-in-container {
+    display: flex;
+}
+
+.sign-in-content {
+    width: 50%;
+    padding: 20px 120px;
+}
+
+.sign-in-pic {
+    width: 50%;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+.separator::before,
+.separator::after {
+content: '';
+flex: 1;
+border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+margin-left: .25em;
 }

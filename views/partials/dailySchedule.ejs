@@ -1,22 +1,22 @@
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onclick="onCheckboxClick(this.name)">
 </div>
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onClick="onCheckboxClick(this.name)">
 </div>
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onClick="onCheckboxClick(this.name)">
 </div>
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onClick="onCheckboxClick(this.name)">
 </div>
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onClick="onCheckboxClick(this.name)">
 </div>
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onClick="onCheckboxClick(this.name)">
 </div>
-<div class="col-md-1 form-check">
+<div class="col-md-1 form-check grid-check">
   <input class="form-check-input col-check" type="checkbox" value="" id="defaultCheck1" name="" onClick="onCheckboxClick(this.name)">
 </div>
 <div class="col-md-1"></div>
@@ -26,11 +26,9 @@
   function onCheckboxClick(name) {
     const cur = document.getElementsByName(name)
     addFormValue(name);
-    // console.log(name)
     const buttons = document.getElementsByClassName('col-check')
     // after click -> checked
     if (cur[0].checked) { 
-      // console.log("checked")
       for (let button of buttons) {
         if (button.name != name) {
             button.id = 'defaultCheck2'
@@ -39,7 +37,6 @@
       }
     // after click -> uncheck
     } else {
-      // console.log("unchecked")
       for (let button of buttons) {
         if (button.name != name) {
           button.id = button.value === 'booked' ? 'defaultCheck2' : 'defaultCheck1'
@@ -49,30 +46,3 @@
     }
   }
 </script>
-
-<!-- <form action="/tenniscourts/<%= court._id %>/booking" method="POST">
-  <div>
-    <input class="form-control" type="hidden" id="ground" name="booking[ground]" value=<%= court %>>
-  </div>
-  <div>
-    <input class="form-control" type="hidden" id="unitCourt2" name="booking[unitCourt]" value="Court 1">
-  </div>
-  <div>
-    <input class="form-control" type="hidden" id="month" name="booking[month]">
-  </div>
-  <div>
-    <input class="form-control" type="hidden" id="day" name="booking[day]">
-  </div>
-  <div>
-    <input class="form-control" type="hidden" id="weekday" name="booking[weekday]">
-  </div>
-  <div>
-    <input class="form-control" type="hidden" id="time" name="booking[time]">
-  </div>
-  <div class="mb-3">
-    <button class="btn btn-success">Add Tennis Court</button>
-  </div>
-</form>
-<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-
-

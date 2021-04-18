@@ -1,1 +1,44 @@
 <% layout('layouts/boilerplate') %>
+<div class="container-logo">
+    <img class="home-logo" src="photos/logo.png" alt="" height="30%"/>
+    <form class="container-home-search" action="/tenniscourts/search" method="GET">
+        <div class="input-group mb-3">
+            <select class="form-select" id="search" name="find_by">
+                <option value="name" selected>Search By...</option>
+                <option value="name">Court name</option>
+                <option value="city">City</option>
+                <option value="zipcode">Zip Code</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+            <button class="btn btn-success">Search</button>
+        </div>
+    </form>
+    <div class="container-home-photo">
+        <div>
+            <img class="home-photo" src="photos/home-1.jpg" alt="" height="30%"/>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, reiciendis quidem! Fugiat temporibus corrupti molestiae quidem praesentium! Magni perspiciatis quasi voluptatum recusandae, blanditiis nisi nihil ipsa dignissimos, necessitatibus quod veniam.
+            </p>
+            <button>Learn More</button>
+        </div>
+        <div>
+            <img class="home-photo" src="photos/home-2.jpg" alt="" height="30%"/>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, reiciendis quidem! Fugiat temporibus corrupti molestiae quidem praesentium! Magni perspiciatis quasi voluptatum recusandae, blanditiis nisi nihil ipsa dignissimos, necessitatibus quod veniam.
+            </p>
+            <button>Learn More</button>
+        </div>
+        <div>
+            <img class="home-photo" src="photos/home-3.jpg" alt="" height="30%"/>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, reiciendis quidem! Fugiat temporibus corrupti molestiae quidem praesentium! Magni perspiciatis quasi voluptatum recusandae, blanditiis nisi nihil ipsa dignissimos, necessitatibus quod veniam.
+            </p>
+            <button>Learn More</button>
+        </div>
+    </div>
+</div>
+
+<div>
+    
+</div>
+

@@ -4,6 +4,8 @@ const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
 const users = require('../controllers/users')
+const { isLoggedIn } = require('../middleware');
+
 
 router.route('/register')
     .get(users.renderRegister)
@@ -14,5 +16,7 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login);
 
 router.get('/logout', users.logout)
+
+router.get('/user/:id', isLoggedIn, catchAsync(users.renderUser));
 
 module.exports = router;

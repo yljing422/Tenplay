@@ -38,15 +38,6 @@
     document.getElementById('unitCourt1').innerText = `${unitCourt}`;
     document.getElementById('unitCourt2').value = `${unitCourt}`;
     addBookedSchedule(bookings, unitCourt);
-    // const month = new Date().getMonth();
-    // const day = new Date().getDate();
-    // const weekDay = new Date().getDay();
-    // console.log(month + 1, day, displayWeekDay(weekDay));
-
-    // console.log('selection: ', unitCourt)
-    // console.log('Date: ', new Date().toDateString())
-    // document.getElementById('date').innerHTML = displayWeekDay(new Date().getDay());
-    //renderSchedule(unitCourt);
   }
 
   function onRenderSchedule(bookings) {
@@ -85,8 +76,8 @@
   function renderDate(month, day, weekDay) {
     let div1 = document.createElement("div");
     let div2 = document.createElement("div");
-    div1.className = "col-md-1";
-    div2.className = "col-md-1";
+    div1.className = "col-md-1 zero-padding";
+    div2.className = "col-md-1 zero-padding";
     div1.id = `${month}-${day}`;
     div2.id = `${weekDay}`;
     div1.innerText = `${month}/${day}`;
@@ -96,76 +87,16 @@
   }
 
   function renderSchedule(month, day, weekDay) {
-    // let array = [];
-    // for (let i = 0; i < 10; i++) {
-    //   array[i] = [];
-    //   let time = (i + 9) % 12;
-    //   if (time === 0) {
-    //     time = 12;
-    //   }
-      const getDiv = document.getElementsByClassName("row-check");
-      // console.log(getDiv)
-      let time = 9;
-
-
-
-      // let largeThan12 = false;
-      for (let rowDiv of getDiv) {
-      //   if (time === 0) {
-      //     time = 12;
-      //   } else if (time > 12) {
-      //     largeThan12 = true;
-      //     time = time - 12;
-      //   }
-
-
-
-
-        // console.log(rowDiv.attributes.value)
-        // console.log(time.toString())
-        // if (rowDiv.attributes.value === `${time}`) {
-          // console.log(rowDiv)
-          let colCheckBoxs = rowDiv.children;
-          // console.log(colCheckBoxs)
-          for (let i = 1; i < colCheckBoxs.length - 2; i++) {
-            // console.log(colCheckBoxs[i].children)
-            colCheckBoxs[i].children[0].name = `${month}-${day + i - 1}-${(weekDay + i - 1) % 7}-${time}`;
-            // renderValue(month, day + j, displayWeekDay((weekDay + j) % 7), time);
-            // <div class="col-md-1 form-check">
-            //   <input class="form-check-input" type="checkbox" value="" id='${day + j}-${i}-${j}'>
-            // </div>
-
-
-
-            
-          }
-          // if (largeThan12) {
-          //   time += 12 + 1;
-          // } else {
-          //   time += 1;
-          // }
-          
-
-
-          time++;
-        // }
+    const getDiv = document.getElementsByClassName("row-check");
+    let time = 9;
+    for (let rowDiv of getDiv) {
+      let colCheckBoxs = rowDiv.children;
+      for (let i = 1; i < colCheckBoxs.length - 2; i++) {
+        colCheckBoxs[i].children[0].name = `${month}-${day + i - 1}-${(weekDay + i - 1) % 7}-${time}`;
       }
-    // }
+      time++;
+    }
   }
-  
-  // function renderValule(month, day, weekDay, time) {
-  //     let div = document.createElement("div");
-  //     div.className = "col-md-1 form-check";
-  //     let input = document.createElement("input");
-  //     input.className = "form-check-input";
-  //     input.type = "checkbox"
-  //     input.id = "defaultCheck1";
-  //     input.name = `${month}-${day}-${weekDay}-${time}`;
-  //     input.onclick = onCheckboxClick(this.name);
-  //     div.appendChild(input);
-  //     // console.log(document.getElementById("row-check"));
-  //     rowDiv.appendChild(div);
-  // }
 
   function displayWeekDay(weekDay) {
     switch (weekDay) {
@@ -235,14 +166,6 @@
     }
   }
 
-  // for (let booking of bookings) {
-  //   if (booking.isSelf) {
-  //   document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true
-  // } else {
-  //   document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).disabled = true
-  //   document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).value = 'whatever'
-  // }
-
   function cancelPreUnitCourtSchedule(bookings, unitCourt) {
     let unitCourtBookings = []
     for (let booking of bookings) {
@@ -268,15 +191,6 @@
       child.disabled = false;
     }
   }
-
-  // confirmedCourt.map(b => document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true)
-  // for (let booking of bookings) {
-  //   if (booking.isSelf) {
-  //   document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true
-  // } else {
-  //   document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).disabled = true
-  //   document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).value = 'whatever'
-  // }
 </script>
 
 <div class="modal fade" id="exampleModalCenter" role="dialog" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -290,7 +204,7 @@
           <!-- Small button groups (default and split) -->
           <div class='selection-part'>
           <div class="btn-group" >
-            <select class="form-select" id="courtNumber" name="booking[court]" onchange="onSelectCourtChange(court.bookings)">
+            <select class="form-select court-selector" id="courtNumber" name="booking[court]" onchange="onSelectCourtChange(court.bookings)">
               <% for (let i = 1; i <= court.courtNum; i++) { %>
                 <option>Court <%= i %></option>
               <% } %>
@@ -311,7 +225,7 @@
             </div>
           </div>
         </div>
-          <div>
+          <div class="close-button">
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -319,51 +233,52 @@
         </div>
 
         <div class="modal-body">
-          <div class="container-fluid" id="schedule-body">
-            <div class="row" id="date-tag">
+          <div class="container-fluid schedule-background" id="schedule-body">
+            <div class="row date-font" id="date-tag">
               <div class="col-md-4"></div>
             </div>
-            <div class="row" id="weekday-tag">
+            <div class="row week-font" id="weekday-tag">
               <div class="col-md-4"></div>
             </div>
+            <hr style="color:white">
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="9">9 am - 10 am</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="9">9 am - 10 am</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="10">10 am - 11 am</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="10">10 am - 11 am</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="11">11 am - 12 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="11">11 am - 12 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="12">12 pm - 1 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="12">12 pm - 1 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="1">1 pm - 2 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="1">1 pm - 2 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="2">2 pm - 3 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="2">2 pm - 3 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="3">3 pm - 4 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="3">3 pm - 4 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="4">4 pm - 5 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="4">4 pm - 5 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="5">5 pm - 6 pm</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="5">5 pm - 6 pm</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div class="row row-check">
-              <div class="col-md-4" id="row-check" value="6">6 am - 7 am</div>
+              <div class="col-md-4 schedule-time-period" id="row-check" value="6">6 am - 7 am</div>
               <%- include('../partials/dailySchedule') %>
             </div>
             <div id="test"></div>
@@ -385,7 +300,7 @@
     <div class="modal-content">
       <form action="/tenniscourts/<%= court._id %>/booking" method="POST">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

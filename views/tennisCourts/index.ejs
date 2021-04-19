@@ -1,9 +1,8 @@
 <% layout('layouts/boilerplate') %>
-<div class="container-serach">
-    <img class="" src="photos/logo.png" alt="" height="120px">
-
-    <form class="index-search" action="/tenniscourts/search" method="GET">
-        <div class="input-group mb-3">
+<div class="container-search">
+    <img class="head-logo" src="../photos/logo.png" alt="">
+    <form class="index-search" id="index-form-search" action="/tenniscourts/search" method="GET">
+        <div class="input-group mb-3 head-search">
             <select class="form-select" id="search" name="find_by">
                 <option value="name" selected>Search By...</option>
                 <option value="name">Court name</option>
@@ -11,29 +10,68 @@
                 <option value="zipcode">Zip Code</option>
             </select>
             <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
-            <button class="btn btn-success">Search</button>
+            <button class="btn btn-success"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="filter">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Avaliable Now
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Rating
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Distance
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    With Light
+                </label>
+              </div>
         </div>
     </form>
 </div>
+    
 
 
 <div id="cluster-map" class="mb-3"></div>
 <% for (let court of tennisCourts) { %>
     <div class="card mb-3 no-left-right-border">
-        <div class="row pd-5">
+        <div class="row pd-5 ">
             <div class="col-md-4">
                 <img class="img-fluid courts-image" src="<%= court.image %>" alt="">
             </div>
             <div class="col-md-8">
-                <div class="card-body card-content">
+                <div class="card-body card-content" id="index-content">
                     <h5 class="card-title"><%= court.name %></h5>
+                    <p id="average-rating"></p>
+                    <p><%= court.name %> is a public tennis establishment situated at <%= court.street %>, <%= court.city %>, <%= court.state %>
+                        <%= court.zipcode %>. There are <%= court.courtNum %> public tennis courts at this tennis facility. The tennis courts are 
+                        <% if (court.light === "Yes") { %>
+                            lighted.
+                        <% } else { %>
+                            not lighted.
+                        <% } %>
+                    </p>
                     <p class="card-text">
                         <small class="text-muted">
                             <%= court.street %>, <%= court.city %>, <%= court.state %>
                                         <%= court.zipcode %>
                         </small>
                     </p>
-                    <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">View <%= court.name %></a>
+                    <div class='index-button'>
+                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">Book Now</a>
+                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">View More</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,9 +85,17 @@
 </script>
 
 <script src="/javascripts/clusterMap.js"></script>
+
 <!-- <script>
-    function hello() {
-      alert('Hello');
-    }
-    document.getElementById("hello").addEventListener("click", hello);
+    function countRating(court) {
+        console.log("run")
+        let rating = 0;
+        let count = 0;
+        for (let review of court.reviews) {
+            rating += review.rating;
+            count++;
+        }
+        const tag = document.getElementById("average-rating");
+        tag.textContent = rating/count;
+    } 
 </script> -->

@@ -1,19 +1,5 @@
 module.exports = [
     {
-        name: 'Cooper Park',
-        street: 'Chesley Ave &, Yorkton Dr',
-        city: 'Mountain View',
-        state: 'CA',
-        zipcode: 94040,
-        courtNum: 4,
-        image: 'https://lh5.googleusercontent.com/p/AF1QipO-AYfyRZFFmdvw767PDXNI5m4KzQqASrgL96QA=w408-h725-k-no',
-        latitude: 37.3676631920171,
-        longitude: -122.07213868892079,
-        startTime: '9AM',
-        endTime: '7PM',
-        light: 'No'
-    },
-    {
         name: 'Cuesta Park',
         street: '615 Cuesta Dr',
         city: 'Mountain View',
@@ -79,6 +65,20 @@ module.exports = [
         image: 'https://lh5.googleusercontent.com/p/AF1QipOEU1ioPE-4j-3ukUZlPDe4bgf-o7Q5288km2F4=w408-h306-k-no',
         latitude: 37.40138600648154,
         longitude: -122.06614084771935,
+        startTime: '9AM',
+        endTime: '7PM',
+        light: 'No'
+    },
+    {
+        name: 'Cooper Park',
+        street: 'Chesley Ave &, Yorkton Dr',
+        city: 'Mountain View',
+        state: 'CA',
+        zipcode: 94040,
+        courtNum: 4,
+        image: 'https://lh5.googleusercontent.com/p/AF1QipO-AYfyRZFFmdvw767PDXNI5m4KzQqASrgL96QA=w408-h725-k-no',
+        latitude: 37.3676631920171,
+        longitude: -122.07213868892079,
         startTime: '9AM',
         endTime: '7PM',
         light: 'No'

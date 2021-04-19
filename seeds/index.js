@@ -29,7 +29,7 @@ const seedDB = async () => {
         // }).send()
         const court = new TennisCourt({
             author: '604e7a0a0f4801231ce41719',
-            name: `${courts[i].name} Tennis Courts`,
+            name: `${courts[i].name}`,
             street: `${courts[i].street}`,
             city: `${courts[i].city}`,
             state: `${courts[i].state}`,

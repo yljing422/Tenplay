@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate')%>
-<div class="container d-flex justify-content-center align-items-center mt-5">
-    <div class="row">
+<!-- <div class="container d-flex justify-content-center align-items-center mt-5"> -->
+    <!-- <div class="row">
         <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
             <div class="card shadow">
                 <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
@@ -35,5 +35,63 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+ -->
+
+<div class="container-login-logo">
+    <img class="signup-logo" src="../../photos/logo.png" alt="">
+    <div class="sign-in-container">
+        <div class="sign-in-content">
+            <div class="sign-up-content1">
+                <p class="login-to-tenplay">Sign up with <strong>Tenplay</strong></p>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary mb-2 login-button-fga" type="button">Continue with Facebook</button>
+                    <button class="btn btn-light mb-2 login-button-fga" type="button">Continue with Google</button>
+                    <button class="btn btn-dark mb-2 login-button-fga" type="button">Continue with Apple</button>
+                </div>
+                <div class="container-separator">
+                    <p class="separator" >OR</p> 
+                </div>
+                
+                <form action="/register" method="POST" class="validated-form" novalidate>
+                    <div class="mb-3">
+                        <!-- <label class="form-label" for="username">Username</label> -->
+                        <input class="form-control user-login" type="text" id="username" name="username" placeholder="Username" autofocus required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label class="form-label" for="password">Password</label> -->
+                        <input class="form-control user-login" type="email" id="email" name="email" placeholder="Email" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label class="form-label" for="password">Password</label> -->
+                        <input class="form-control user-login" type="password" id="password" name="password" placeholder="Password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <button class="btn btn-success col-12 button-login">Log In</button>
+                </form>
+            </div>
+            <div class="sign-in-content2">
+                <p>Already on Tenplay? <a href="http://localhost:5000/login">Log In</a> now and start booking!</p>
+                <p>By logging in, you agree to Tenplay's Terms of Service and Privacy Policy.</p>
+            </div>
+        </div>
+        
+        <div class="container-sign-up-pic">
+            <img class="sign-up-pic" src="../../photos/sign_up.png" alt="">
+        </div>
+
+
+
+        
     </div>
 </div>

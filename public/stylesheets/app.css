@@ -9,8 +9,17 @@
     height: 300px;
 }
 
+.search-bar-partial {
+    padding-bottom: 15px;
+}
+
+.search-bar-partial form {
+    padding: 0 15px 0 150px;
+}
+
 /* nav bar */
-.navbar {
+.navbar, 
+.footer {
     background: #24424C;
 }
 
@@ -65,13 +74,13 @@
 
 /* user page */
 .floating-card {
-    /* fixed style
+    /* fixed style */
     position: fixed;
-    padding-top: 40px; */
+    padding-top: 40px;
 
     /* absolute style */
-    position: absolute;
-    padding-top: 40px; 
+    /* position: absolute;
+    padding-top: 40px;  */
 }
 .show-background {
     position:absolute;
@@ -79,8 +88,105 @@
     right: 0;
 }
 
+.list-group-item.active {
+    background-color: #24424C;
+    border-color: #24424C;
+}
+
+.container-userinfo {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    padding: 25px 0 50px 0;
+}
+
+.user-container {
+    padding-left: 50px;
+}
+
+.user-image {
+    height: 250px;
+}
+
+.list-group {
+    text-align: center;
+}
+
+.list-group-item {
+    background-color: rgba(36, 66, 76, 0.1);
+    margin-bottom: 5px;
+    border: none;
+    height: 46px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.booking-content {
+    padding: 25px 0;
+}
+
 .user-bookings {
     padding-top: 200px;
+}
+
+.booking-container {
+    background-color: rgba(36, 66, 76, 0.1);
+    margin: 0;
+    width: 700px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+.booking-content {
+    display: flex;
+    color: #24424C;
+}
+
+.booking-text {
+    display: flex;
+}
+
+.booking-date {
+    font-size: 16px;
+    padding-left: 330px;
+    font-weight: 600;
+}
+
+#ground {
+    font-size: x-large;
+    font-weight: 680;
+    margin-bottom: 2px;
+}
+
+#court {
+    font-size: xx-large;
+    margin-bottom: 8px;
+}
+
+#time {
+    font-size: medium;
+    margin-bottom: 8px;
+}
+
+.booking-image {
+    height: 180px;
+    width: 250px;
+    padding: 0 20px;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.booking-button {
+    margin: 0 10px;
+    background-color: #85CF4F;
+    color: white;
+    font-weight: bold;
 }
 
 /* pop up */
@@ -163,40 +269,114 @@
 
 .pd-5 {
     padding: 25px;
-
 }
 
-/* sign-in */
+/* sign-in/up */
+.container-login-logo {
+    text-align: center;
+    height: 100%;
+}
+
+.login-logo {
+    height: 13%;
+}
+
+.signup-logo {
+    height: 12%;
+}
+
 .sign-in-container {
     display: flex;
 }
 
 .sign-in-content {
     width: 50%;
-    padding: 20px 120px;
+}
+
+.sign-in-content1 {
+    padding: 38px 150px;
+}
+
+.sign-up-content1 {
+    padding: 35px 150px;
+}
+
+.sign-in-content2 :first-child {
+    font-weight: 400;
+}
+
+.sign-in-content2 :nth-child(2) {
+    color: #939393;
+    font-size: small;
+}
+
+.login-to-tenplay {
+    color: #85CF4F;
+    font-size: 23px
+}
+
+.login-button-fga {
+    border: 1px solid black;
+    border-radius: 0;
+    font-weight: 700;
+    font-size:15px;
+    height: 45px;
+}
+
+.container-sign-in-pic {
+    width: 50%;
+    padding: 58px 50px;
+}
+
+.container-sign-up-pic {
+    width: 50%;
+    padding: 35px 50px 35px 40px;
 }
 
 .sign-in-pic {
-    width: 50%;
+    height: 80%;
+}
+
+.sign-up-pic {
+    height: 75%;
+}
+
+.container-separator {
+    padding: 6px;
 }
 
 .separator {
     display: flex;
     align-items: center;
     text-align: center;
+    color: #939393;
   }
   
 .separator::before,
 .separator::after {
-content: '';
-flex: 1;
-border-bottom: 1px solid #000;
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #939393;
 }
 
 .separator:not(:empty)::before {
-margin-right: .25em;
+    margin-right: .25em;
 }
 
 .separator:not(:empty)::after {
-margin-left: .25em;
+    margin-left: .25em;
+}
+
+.container-forgot-pw {
+    font-size: small;
+    padding: 13px;
+}
+
+.forgot-pw {
+    padding-left: 127px;
+}
+
+.button-login {
+    background-color: #85CF4F;
+    border: none;
 }

@@ -1,67 +1,52 @@
 <% layout('layouts/boilerplate')%>
-<div>
-    <img src="../../photos/logo.png" alt="">
-</div>
-<div class="sign-in-container">
-    <div class="sign-in-content">
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary mb-2" type="button">Button</button>
-            <button class="btn btn-light mb-2" type="button">Button</button>
-            <button class="btn btn-dark mb-2" type="button">Button</button>
-          </div>
-
-        <p class="separator" >OR</p> 
-
-        <form action="/login" method="POST" class="validated-form" novalidate>
-            <div class="mb-3">
-                <label class="form-label" for="username">Username</label>
-                <input class="form-control" type="text" id="username" name="username" autofocus required>
-                <div class="valid-feedback">
-                    Looks good!
+<div class="container-login-logo">
+    <img class="login-logo" src="../../photos/logo.png" alt="">
+    <div class="sign-in-container">
+        <div class="sign-in-content">
+            <div class="sign-in-content1">
+                <p class="login-to-tenplay">Login to <strong>Tenplay</strong></p>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary mb-2 login-button-fga" type="button">Continue with Facebook</button>
+                    <button class="btn btn-light mb-2 login-button-fga" type="button">Continue with Google</button>
+                    <button class="btn btn-dark mb-2 login-button-fga" type="button">Continue with Apple</button>
                 </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="password" id="password" name="password" required>
-                <div class="valid-feedback">
-                    Looks good!
+                <div class="container-separator">
+                    <p class="separator" >OR</p> 
                 </div>
-            </div>
-            <button class="btn btn-success col-12">Login</button>
-        </form>
-    </div>
-    
-    <!-- <div class="container mt-5  d-flex justify-content-center align-items-center sign-in-content">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Login</h5>
-                        <form action="/login" method="POST" class="validated-form" novalidate>
-                            <div class="mb-3">
-                                <label class="form-label" for="username">Username</label>
-                                <input class="form-control" type="text" id="username" name="username" autofocus required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label" for="password">Password</label>
-                                <input class="form-control" type="password" id="password" name="password" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <button class="btn btn-success col-12">Login</button>
-                        </form>
+                
+                <form action="/login" method="POST" class="validated-form" novalidate>
+                    <div class="mb-3">
+                        <!-- <label class="form-label" for="username">Username</label> -->
+                        <input class="form-control user-login" type="text" id="username" name="username" placeholder="Username" autofocus required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
-                </div>
+                    <div class="">
+                        <!-- <label class="form-label" for="password">Password</label> -->
+                        <input class="form-control user-login" type="password" id="password" name="password" placeholder="Password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="container-forgot-pw">
+                        <a class="forgot-pw" href="">Forgot Password?</a>
+                    </div>
+                    <button class="btn btn-success col-12 button-login">Log In</button>
+                </form>
+            </div>
+            <div class="sign-in-content2">
+                <p>New here? <a href="http://localhost:5000/register">Sign up</a> now and start booking!</p>
+                <p>By logging in, you agree to Tenplay's Terms of Service and Privacy Policy.</p>
             </div>
         </div>
-    </div> -->
-    <div class="sign-in-pic">
-        <img src="../../photos/sign_in.jpg" alt="">
+        
+        <div class="container-sign-in-pic">
+            <img class="sign-in-pic" src="../../photos/sign_in.jpg" alt="">
+        </div>
+
+
+
+        
     </div>
 </div>

@@ -1,134 +1,160 @@
 <% layout('layouts/boilerplate') %>
-    <link rel="stylesheet" href="/stylesheets/stars.css">
-    <div class="container-serach">
-        <img class="" src="../photos/logo.png" alt="" height="120px">
-    
-        <form class="index-search" action="/tenniscourts/search" method="GET">
-            <div class="input-group mb-3">
-                <select class="form-select" id="search" name="find_by">
-                    <option value="name" selected>Search By...</option>
-                    <option value="name">Court name</option>
-                    <option value="city">City</option>
-                    <option value="zipcode">Zip Code</option>
-                </select>
-                <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
-                <button class="btn btn-success">Search</button>
-            </div>
-        </form>
-    </div>
+<link rel="stylesheet" href="/stylesheets/stars.css">
 
-    </div>
+<div class="container-search">
+    <img class="head-logo" src="../photos/logo.png" alt="">
+    <form class="index-search" action="/tenniscourts/search" method="GET">
+        <div class="input-group mb-3 head-search">
+            <select class="form-select" id="search" name="find_by">
+                <option value="name" selected>Search By...</option>
+                <option value="name">Court name</option>
+                <option value="city">City</option>
+                <option value="zipcode">Zip Code</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+            <button class="btn btn-success"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
 
-    <div class="row">
-        <div class="col-6 mb-3">
-            <div class="card mb-3">
-                <img src="<%= court.image %>" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <%= court.name %>
-                    </h5>
-                    <p class="card-text text-muted">
-                        <%= court.street %>, <%= court.city %>, <%= court.state %>
-                                    <%= court.zipcode %>
-                    </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Courts: <%= court.courtNum %>
-                    </li>
-                    <li class="list-group-item">
-                        Opening hour: <%= court.startTime %>-<%= court.endTime %>
-                    </li>
-                    <li class="list-group-item">Light: <%= court.light %>
-                    </li>
-                </ul>
-                <% if (currentUser && currentUser._id.equals('604e7a0a0f4801231ce41719')) { %>
-                    <div class="card-body">
-                        <a class="card-link btn btn-info" href="/tenniscourts/<%= court._id %>/edit">Edit</a>
-                        <form class="d-inline" action="/tenniscourts/<%= court._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
+<div class="show-background"></div>
+
+<div class="row">
+    <div class="col-4">
+        <div class="floating-card user-container">
+            <img class="mb-3 user-image" src="../../photos/court_photo.jpg" alt="courtphoto">
+            <div class="row">
+                <div class="col-12">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-about" role="tab" aria-controls="home">About</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-reviews" role="tab" aria-controls="profile">Reviews</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-photos" role="tab" aria-controls="messages">Photos</a>
                     </div>
-                <% } %>
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onClick="onRenderSchedule(court.bookings)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 user-col-right">
+        <div class="display-flex">
+            <div id="show-info-group">
+                <p class="container-userinfo">
+                    <%= court.name %>
+                </p>
+                <div id="court-detail">
+                    <p id="court-address">
+                        <strong>Address: </strong>
+                        <%= court.street %>, <%= court.city %>, <%= court.state %> <%= court.zipcode %>
+                    </p>
+                    <p id="court-hour"><strong>Hours: </strong>7AM-PM</p>
+                    <p><strong>Court Number: </strong><%= court.courtNum %></p>
+                </div>
+                
+            </div>
+            <div id="show-button-group" class="display-flex">
+                <a id="direction" class="show-button" type="button" class="btn btn-primary" href="">
+                    Get Direction
+                </a>
+                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onClick="onRenderSchedule(court.bookings)">
                     Book Now
                 </button>
                 
                 <%- include('../partials/schedule') %>
-
-                <div class="card-footer text-muted">
-                    <a href="/tenniscourts">All Tennis Courts</a>
+            </div>
+        </div>
+        <div class="tab-content booking-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-about" role="tabpanel" aria-labelledby="list-home-list">
+                <div id='map'></div>
+                
+                <div id="about-text">
+                    <p><strong><%= court.name %></strong> is a public tennis establishment situated at <a href="" style="color: #24424C"><strong><%= court.street %>, <%= court.city %>, <%= court.state %> <%= court.zipcode %></strong></a>. 
+                        There are <strong><%= court.courtNum %></strong> public tennis courts at this tennis facility. The tennis courts are 
+                        <strong>
+                            <% if (court.light === "Yes") { %>
+                                lighted.
+                            <% } else { %>
+                                not lighted.
+                            <% } %>
+                        </strong>
+                        . Amenities in this park include: BBQ facilities, bocce ball court, children's playground, horseshoe area, passive areas, picnic areas, tennis courts, 
+                        volleyball court, and rest rooms. Host to Summer Sounds concert series.
+                    </p>
                 </div>
             </div>
-            <div id='map'></div>
-        </div>
-        <div class="col-6">
-            <% if (currentUser) { %>
-                <h2>Leave a Review</h2>
-                <form action="/tenniscourts/<%= court._id %>/reviews" method="POST" class="mb-3 validated-form"
-                    novalidate>
-                    <!-- <div class="mb-3">
-                        <label class="form-label" for="rating">Rating</label>
-                        <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-                    </div> -->
-                    <div class="mb-3">
-                        <fieldset class="starability-basic">
-                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
-                                checked aria-label="No rating." />
-                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                            <label for="first-rate1" title="Terrible">1 star</label>
-                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                            <label for="first-rate2" title="Not good">2 stars</label>
-                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                            <label for="first-rate3" title="Average">3 stars</label>
-                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                            <label for="first-rate4" title="Very good">4 stars</label>
-                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                            <label for="first-rate5" title="Amazing">5 stars</label>
-                        </fieldset>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="body">Review Text</label>
-                        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
-                            required></textarea>
-                        <div class="valid-feedback">
-                            Look good!
+            <div class="tab-pane fade" id="list-reviews" role="tabpanel" aria-labelledby="list-profile-list">
+                <% if (currentUser) { %>
+                    <h2>Leave a Review</h2>
+                    <form action="/tenniscourts/<%= court._id %>/reviews" method="POST" class="mb-3 validated-form"
+                        novalidate>
+                        <div class="mb-3">
+                            <fieldset class="starability-basic">
+                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
+                                    checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="body">Review Text</label>
+                            <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
+                                required></textarea>
+                            <div class="valid-feedback">
+                                Look good!
+                            </div>
+                        </div>
+                        <button class="btn btn-success">Submit</button>
+                    </form>
+                <% } %>
+                <% for(let review of court.reviews) { %>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= review.author.username %>
+                            </h5>
+                            <p class="starability-result" data-rating="<%= review.rating %>">
+                                Rated: <%= review.rating %> stars
+                            </p>
+                            <p class="card-text">
+                                <%= review.body %>
+                            </p>
+                            <% if (currentUser && review.author.equals(currentUser._id)) { %>
+                                <form
+                                    action="/tenniscourts/<%= court._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                    method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                                <% } %>
                         </div>
                     </div>
-                    <button class="btn btn-success">Submit</button>
-                </form>
-            <% } %>
-            <% for(let review of court.reviews) { %>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= review.author.username %>
-                        </h5>
-                        <p class="starability-result" data-rating="<%= review.rating %>">
-                            Rated: <%= review.rating %> stars
-                        </p>
-                        <!-- <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %>
-                        </h6> -->
-                        <p class="card-text">
-                            Review: <%= review.body %>
-                        </p>
-                        <% if (currentUser && review.author.equals(currentUser._id)) { %>
-                            <form
-                                action="/tenniscourts/<%= court._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                method="POST">
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                            <% } %>
-                    </div>
+                <% } %>
+             
+            </div>
+            <div class="tab-pane fade" id="list-photos" role="tabpanel" aria-labelledby="list-messages-list">
+                <div>
+                    <img src="<%= court.image %>" alt="">
                 </div>
-            <% } %>
+            </div>
         </div>
     </div>
+</div>
+
+
+
 
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const court = <%- JSON.stringify(court) %>;
+</script>
+
+<script>
+
 </script>
 
 <script src="/javascripts/showPageMap.js"></script>

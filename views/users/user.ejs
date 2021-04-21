@@ -34,8 +34,8 @@
         </div>
     </div>
     <div class="col-8 user-col-right">
-        <div class="container-userinfo">
-            <p><%= user.username %></p>
+        <div>
+            <p class="container-userinfo" id="user-name"><%= user.username %></p>
         </div>
         <div class="tab-content booking-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="list-bookings" role="tabpanel" aria-labelledby="list-home-list">
@@ -61,6 +61,8 @@
                                                         <%= booking.time - 12 %>:00 pm
                                                     <% } else if (booking.time === 12) { %>
                                                         <%= booking.time %>:00 pm
+                                                    <% } else { %>
+                                                        <%= booking.time %>:00 am
                                                     <% } %>
                                                 </strong> to 
                                                 <strong>
@@ -68,6 +70,8 @@
                                                         <%= booking.time + 1 - 12 %>:00 pm
                                                     <% } else if (booking.time + 1 === 12) { %>
                                                         <%= booking.time + 1%>:00 pm
+                                                    <% } else { %>
+                                                        <%= booking.time %>:00 am
                                                     <% } %>
                                                 </strong>
                                             </p>

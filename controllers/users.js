@@ -41,13 +41,18 @@ module.exports.logout = (req, res) => {
 
 module.exports.renderUser = async(req, res) => {
     const { id } = req.params;
-    console.log(id)
     const user = await User.findById(id).populate('bookings').populate({
         path: 'bookings',
         populate: {
             path: 'ground'
         }
     });
-    console.log(user)
+    user.bookings.sort(compare = (a, b) => {
+        if (a.month * 31 + a.day <= b.month * 31 + b.day) {
+            return -1;
+        } else {
+            return 1;
+        }
+    });
     res.render('users/user', { user });
 }

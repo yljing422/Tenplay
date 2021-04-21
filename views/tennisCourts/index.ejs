@@ -1,4 +1,6 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
 <div class="container-search">
     <img class="head-logo" src="../photos/logo.png" alt="">
     <form class="index-search" id="index-form-search" action="/tenniscourts/search" method="GET">
@@ -52,8 +54,16 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body card-content" id="index-content">
-                    <h5 class="card-title"><%= court.name %></h5>
-                    <p id="average-rating"></p>
+                    <div id="name-rating">
+                        <h5 class="card-title"><%= court.name %></h5>
+
+                        <p id="index-star" class="starability-result" data-rating="<%= Math.round(court.rating.toFixed(1)) %>">
+                            <%= court.rating.toFixed(1) %>
+                        </p>
+                        <p id="average-rating"><%= court.rating.toFixed(1) %></p>
+                        <p id="total-rating">(<%= court.reviews.length %>)</p>
+                    </div>
+                    
                     <p><%= court.name %> is a public tennis establishment situated at <%= court.street %>, <%= court.city %>, <%= court.state %>
                         <%= court.zipcode %>. There are <%= court.courtNum %> public tennis courts at this tennis facility. The tennis courts are 
                         <% if (court.light === "Yes") { %>
@@ -69,8 +79,8 @@
                         </small>
                     </p>
                     <div class='index-button'>
-                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">Book Now</a>
-                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">View More</a>
+                        <a id="click" class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>" onClick="addHrefToDirection(court)">Book Now</a>
+                        <a id="click" class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>" onClick="addHrefToDirection(court)">View More</a>
                     </div>
                 </div>
             </div>
@@ -84,18 +94,18 @@
     const tennisCourts = { features: <%- JSON.stringify(tennisCourts) %> };
 </script>
 
-<script src="/javascripts/clusterMap.js"></script>
+<script>
+    function addHrefToDirection() {
+        const direction = document.getElementById("direction");
+        direction.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
+    }
 
-<!-- <script>
-    function countRating(court) {
-        console.log("run")
-        let rating = 0;
-        let count = 0;
-        for (let review of court.reviews) {
-            rating += review.rating;
-            count++;
-        }
-        const tag = document.getElementById("average-rating");
-        tag.textContent = rating/count;
-    } 
-</script> -->
+    document.getElementById("click").onClick = function() {
+        var link = document.getElementById("direction");
+        link.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
+    }
+
+
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>

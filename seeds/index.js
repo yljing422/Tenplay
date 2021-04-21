@@ -48,7 +48,8 @@ const seedDB = async () => {
             endTime: `${courts[i].endTime}`,
             light: `${courts[i].light}`,
             latitude: `${courts[i].latitude}`,
-            longitude: `${courts[i].longitude}`
+            longitude: `${courts[i].longitude}`,
+            rating: 0.0
         });
         await court.save();
     }

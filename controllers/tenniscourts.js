@@ -30,6 +30,7 @@ module.exports.createTennisCourt = async (req, res, next) => {
     console.log(req.body.tenniscourt)
     court.geometry = geoData.body.features[0].geometry;
     court.author = req.user._id;
+    court.rating = 0.0;
     await court.save();
     req.flash('success', 'Successfully made a new tennis court!');
     res.redirect(`/tenniscourts/${court._id}`);

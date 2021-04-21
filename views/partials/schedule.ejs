@@ -1,33 +1,3 @@
-  <!-- 
-  1. 切换court， refresh selection-part
-  2. form check case2.1 - check: disable rest of check box
-                case2.2 - uncheck: do nothing
-  3. fire api call 3.1: some url
-                   3.2: groung, address, court number, date, time
- --> 
-
- <!-- case1: change checked if it is from cur user
- document.getElementById('MON-9').checked = true;
- 
- case2: otherwise, change disabled and className
- document.getElementById('MON-9').disabled = true;
- document.getElementById('MON-9').className += " disabled-checkbox"
-
- -->
-
-  <!-- Map each booking with API data
-  confirmedCourt = [Booking1, Booking2]
-  confirmedCourt.map(b => document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true)
-  for (let booking of bookings) {
-    if (booking.isSelf) {
-    document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).checked = true
-  } else {
-    document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).disabled = true
-    document.getElementById(`${b.date}-${b.weekDay}-${b.startTime}`).value = 'whatever'
-  }
-  } -->
-
-<!-- Modal -->
 <script>
   window.unitCourt = "Court 1";
   let done = false;
@@ -130,7 +100,7 @@
     document.getElementById("day").value = timeArr[1];
     document.getElementById("weekday").value = timeArr[2];
     document.getElementById("time").value = timeArr[3];
-
+    document.getElementById("confirm-time").textContent = `April ${timeArr[1]}th, at ${timeArr[3]}:00`;
   }
 
   function addBookedSchedule(bookings, unitCourt) {
@@ -197,7 +167,7 @@
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
         <div class="modal-header">
-          <div class="div">
+          <div id="hear-container">
             <h5 class="modal-title" id="exampleModalLongTitle"><%= court.name %></h5>
             <p id="time-period"></p>
           </div>
@@ -240,7 +210,7 @@
             <div class="row week-font" id="weekday-tag">
               <div class="col-md-4"></div>
             </div>
-            <hr style="color:white">
+            <hr id="line">
             <div class="row row-check">
               <div class="col-md-4 schedule-time-period" id="row-check" value="9">9 am - 10 am</div>
               <%- include('../partials/dailySchedule') %>
@@ -285,9 +255,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" id="close-button" data-bs-dismiss="modal">Close</button>
            <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirm</button>
+          <button type="button" class="btn btn-primary" id="confirm-button" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirm</button>
         </div>
     </div>
   </div>
@@ -298,16 +268,17 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
-      <form action="/tenniscourts/<%= court._id %>/booking" method="POST">
-        <div class="modal-header">
+      <form id="booking-confirm-form" action="/tenniscourts/<%= court._id %>/booking" method="POST">
+        <div class="modal-header" id="confirm-header">
           <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <p>You've booked your court at <br><%= court.name %></p>
-          <p><%= court.street %>, <%= court.city %>, <br><%= court.state %> <%= court.zipcode %></p>
-          <p id="unitCourt1">Court 1</p>
-          <p>A comfirmation has sent to your email.</p>
+        <div class="modal-body modal-body2">
+          <p id="confirm-ground">You've booked your court at <br><%= court.name %></p>
+          <p id="confirm-address"><%= court.street %>, <%= court.city %>, <br><%= court.state %> <%= court.zipcode %></p>
+          <p class="confirm-time" id="unitCourt1">Court 1</p>
+          <p class="confirm-time" id="confirm-time">April </p>
+          <p class="text-muted" id="confirm-mess">A comfirmation has sent to your email.</p>
         </div>
         <form action="/tenniscourts/<%= court._id %>/booking" method="POST">
           <input class="form-control" type="hidden" id="ground" name="booking[ground]" value=<%= court._id %>>
@@ -316,9 +287,9 @@
           <input class="form-control" type="hidden" id="day" name="booking[day]">
           <input class="form-control" type="hidden" id="weekday" name="booking[weekDay]">
           <input class="form-control" type="hidden" id="time" name="booking[time]">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Cancel My Booking</button>
-            <button class="btn btn-primary" data-bs-target="#exampleModal">Confirm</button>
+          <div class="modal-footer modal-footer2" >
+            <a href="" id="confirm-account" type="button" class="btn btn-secondary">View My Bookings</a>
+            <button id="confirm-confirm" class="btn btn-primary" data-bs-target="#exampleModal">Confirm</button>
             <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-target="#exampleModal">Confirm</button> -->
           </div>
         </form>

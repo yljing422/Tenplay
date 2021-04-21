@@ -1,3 +1,7 @@
+.display-flex {
+    display: flex;
+}
+
 /* map */
 #cluster-map {
     width: 100%;
@@ -6,9 +10,8 @@
 
 #map {
     width: 100%;
-    height: 300px;
+    height: 200px;
 }
-
 
 .container {
     padding: 0 70px;
@@ -36,6 +39,13 @@
     border: none;
 }
 
+.home-pic-container button {
+    background-color: #85CF4F;
+    border: none;
+    color: white;
+    padding: 3px 5px;
+}
+
 /* nav bar */
 .navbar, 
 .footer {
@@ -47,9 +57,16 @@
 }
 
 /* home page */
+
+.home-search-button {
+    background-color: #85CF4F;
+    border: none;
+}
+
 .container-logo {
     text-align: center;
     height: 100%;
+    padding-top: 30px;
 }
 
 .home-logo {
@@ -57,12 +74,31 @@
     height:18%;
 }
 
+.home-pic-container {
+    width: 250px;
+}
+
+
+.home-photo {
+    height: 50%;
+}
+
 .container-home-photo {
     display: flex;
+    text-align: center;
+    justify-content: space-between;
 }
 
 .container-home-search {
-    padding-bottom: 150px;
+    padding-bottom: 130px;
+}
+
+.home-pic-container h5 {
+    height: 45px;
+}
+
+.home-pic-container p {
+    height: 180px;
 }
 
 /* index page */
@@ -85,13 +121,16 @@
 }
 
 .pd-5 {
-    padding: 55px 0;
+    padding: 50px 0;
 }
 
 #index-content {
     padding-left: 40px;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
+#name-rating {
+    display: flex;
 }
 
 #index-content h5 {
@@ -99,6 +138,18 @@
     font-size: 25px;
     color: #24424C;
     padding-bottom: 12px;
+    padding-right: 15px;
+}
+
+#average-rating {
+    padding: 8px 3px 8px 8px;
+    font-size: 15px;
+}
+
+#total-rating {
+    padding: 8px 0;
+    font-size: 15px;
+    color: #A9A9A9;
 }
 
 .index-button {
@@ -140,10 +191,61 @@
     align-self: flex-end;
 }
 
+.show-court-button:hover {
+    background-color: #77836C;
+}
+
 /* show page */
 .show-background {
     background-color: rgba(133, 207, 79, 0.5);
     height: 150px;
+}
+
+#show-info-group {
+    width: 75%;
+}
+
+#court-detail {
+    font-size: 15px;
+}
+
+#court-address,
+#court-hour {
+    margin: 0;
+}
+
+#show-button-group {
+    flex-direction: column;
+    align-content: flex-end;
+    width: 25%;
+    padding-top: 35px;
+}
+
+.show-button {
+    margin-left: 15px;
+    background-color: #85CF4F;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 22px;
+    color: white;
+    margin-top: 12px;
+}
+
+.show-button:hover {
+    background-color: #77836C;
+}
+
+#list-about,
+#list-reviews,
+#list-photos {
+    width: 100%;
+}
+
+#about-text {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 30px 0;
 }
 
 /* user page */
@@ -153,8 +255,8 @@
     padding-top: 40px;
 
     /* absolute style */
-    /* position: absolute;
-    padding-top: 40px;  */
+    position: absolute;
+    padding-top: 40px; 
 }
 .show-background {
     position:absolute;
@@ -169,9 +271,14 @@
 
 .container-userinfo {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600;
-    padding: 25px 0 50px 0;
+    padding: 20px 0 0 0;
+    margin-bottom: 6px;
+}
+
+#user-name {
+    padding-bottom: 80px;
 }
 
 .user-col-right {
@@ -272,10 +379,34 @@
     max-width: 600px;
 }
 
+.modal-content {
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+#hear-container {
+    padding-left: 25px;
+}
+
 .close-button {
     right: 10px;
     top: 10px;
     position: absolute;
+}
+
+.modal-header {
+    padding: 20px 23px 0px;
+}
+
+#exampleModalLongTitle {
+    font-size: 26px;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#time-period {
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .selection-part {
@@ -289,7 +420,7 @@
 .court-selector {
     width: 90px;
     height: 30px;
-    margin-left: 30px;
+    margin-left: 15px;
     font-size: 14px;
     padding: 0;
     padding-left: 7px;
@@ -301,6 +432,19 @@
 
 #defaultCheck2 {
     background: #C4C4C4;
+}
+
+#line {
+    color: white;
+    margin: 10px 0px 5px;
+}
+
+.modal-body {
+    padding: 0px 16px;
+}
+
+.modal-body2 {
+    padding: 12px 16px;
 }
 
 .zero-padding {
@@ -326,16 +470,128 @@
     border-radius: 20px;
 }
 
+#schedule-body {
+    padding: 25px 0;
+    width: 520px;
+}
+
 .schedule-time-period {
     text-align: center;
 }
 
 .row-check {
     padding: 5px 0;
+    font-weight: 500;
+
 }
 
 .grid-check {
   padding-left: 28px;
+}
+
+.col-check {
+    height: 20px;
+    width: 20px;
+}
+
+.no-content {
+    padding: 0;
+}
+
+.modal-footer {
+    padding-right: 38px;
+}
+
+#confirm-button {
+    background-color: #85CF4F;
+    margin-left: 16px;
+    padding: 5px 25px;
+    border: none;
+    border-radius: 0;
+}
+
+#close-button {
+    background-color: #939393;
+    padding: 5px 25px;
+    border: none;
+    border-radius: 0;
+}
+
+#booking-confirm-form {
+    text-align: center;
+}
+
+#confirm-header {
+    padding: 20px 23px 15px;
+}
+
+#confirm-ground {
+    font-size: 25px;
+    color: #24424C;
+    font-weight: 700;
+    line-height: 40px;
+    margin: 5px;
+}
+
+#confirm-address {
+    font-weight: 500;
+    font-size: 17px;
+    color: #24424C;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.confirm-time {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 43px;
+    color: #24424C;
+}
+
+#unitCourt1 {
+    margin: 0;
+}
+
+#confirm-mess {
+    font-size: 18px;
+    font-weight: 100;
+    margin-bottom: 4px;
+}
+
+.modal-footer2 {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 18px;
+}
+
+#confirm-account {
+    background-color: #85CF4F;
+    border: none;
+    border-radius: 0;
+    padding: 8px 12px;
+    font-weight: 500;
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+}
+
+#confirm-confirm {
+    background-color: #85CF4F;
+    padding: 8px 51px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+#confirm-account:hover {
+    background-color: #77836C;
+}
+
+#confirm-confirm:hover {
+    background-color: #77836C;
 }
 
 /* sign-in/up */

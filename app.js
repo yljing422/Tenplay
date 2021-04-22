@@ -120,10 +120,6 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
-app.get('/booking', (req, res) => {
-    console.log('work')
-})
-
 // handle by 404 if no any route hitted
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));

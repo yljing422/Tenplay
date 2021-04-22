@@ -27,7 +27,6 @@ module.exports.createTennisCourt = async (req, res, next) => {
         limit: 1
     }).send()
     const court = new TennisCourt(req.body.tenniscourt);
-    console.log(req.body.tenniscourt)
     court.geometry = geoData.body.features[0].geometry;
     court.author = req.user._id;
     court.rating = 0.0;
@@ -59,7 +58,6 @@ module.exports.showTennisCourt = async (req, res) => {
         req.flash('error', 'Cannot find that tennis court!');
         return res.redirect('/tenniscourts');
     }
-    console.log(bookings)
     res.render('tennisCourts/show', { court });
 }
 

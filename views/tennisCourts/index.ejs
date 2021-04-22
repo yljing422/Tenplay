@@ -5,13 +5,13 @@
     <img class="head-logo" src="../photos/logo.png" alt="">
     <form class="index-search" id="index-form-search" action="/tenniscourts/search" method="GET">
         <div class="input-group mb-3 head-search">
-            <select class="form-select" id="search" name="find_by">
+            <select class="form-select" id="search1" name="find_by">
                 <option value="name" selected>Search By...</option>
                 <option value="name">Court name</option>
                 <option value="city">City</option>
                 <option value="zipcode">Zip Code</option>
             </select>
-            <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+            <input type="text" class="form-control" placeholder="Find Courts Near" id="search2" name="location">
             <button class="btn btn-success"><i class="fas fa-search"></i></button>
         </div>
         <div id="filter">
@@ -79,8 +79,8 @@
                         </small>
                     </p>
                     <div class='index-button'>
-                        <a id="click" class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>" onClick="addHrefToDirection(court)">Book Now</a>
-                        <a id="click" class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>" onClick="addHrefToDirection(court)">View More</a>
+                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">Book Now</a>
+                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">View More</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
     const tennisCourts = { features: <%- JSON.stringify(tennisCourts) %> };
 </script>
 
-<script>
+<!-- <script>
     function addHrefToDirection() {
         const direction = document.getElementById("direction");
         direction.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
@@ -106,6 +106,6 @@
     }
 
 
-</script>
+</script> -->
 
 <script src="/javascripts/clusterMap.js"></script>

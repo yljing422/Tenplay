@@ -18,7 +18,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 // use joi schema validation to check the error
 module.exports.validateTennisCourt = (req, res, next) => {
-    console.log(req.body);
     const { error } = tenniscourtSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join('.');
@@ -52,7 +51,6 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 
 // use joi schema validation to check the error
 module.exports.validateReview = (req, res, next) => {
-    console.log(req.body);
     const { error } = reviewSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join('.');
@@ -64,7 +62,6 @@ module.exports.validateReview = (req, res, next) => {
 
 // use joi schema validation to check the error
 module.exports.validateBooking = (req, res, next) => {
-    console.log(req.body);
     const { error } = bookingSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join('.');

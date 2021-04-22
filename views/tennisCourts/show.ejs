@@ -5,13 +5,13 @@
     <img class="head-logo" src="../photos/logo.png" alt="">
     <form class="index-search" action="/tenniscourts/search" method="GET">
         <div class="input-group mb-3 head-search">
-            <select class="form-select" id="search" name="find_by">
+            <select class="form-select" id="search1" name="find_by">
                 <option value="name" selected>Search By...</option>
                 <option value="name">Court name</option>
                 <option value="city">City</option>
                 <option value="zipcode">Zip Code</option>
             </select>
-            <input type="text" class="form-control" placeholder="Find Courts Near" id="search" name="location">
+            <input type="text" class="form-control" placeholder="Find Courts Near" id="search2" name="location">
             <button class="btn btn-success"><i class="fas fa-search"></i></button>
         </div>
     </form>
@@ -37,9 +37,20 @@
     <div class="col-8 user-col-right">
         <div class="display-flex">
             <div id="show-info-group">
-                <p class="container-userinfo">
+                <div class="display-flex">
+                    <p class="container-userinfo">
                     <%= court.name %>
-                </p>
+                    </p>
+                    
+                    <% if (currentUser && currentUser._id.equals('604e7a0a0f4801231ce41719')) { %>                    
+                        <div class="card-body">
+                            <a class="card-link btn btn-outline-info btn-sm" href="/tenniscourts/<%= court._id %>/edit">Edit</a>
+                            <form class="d-inline" action="/tenniscourts/<%= court._id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
                 <div id="court-detail">
                     <p id="court-address">
                         <strong>Address: </strong>
@@ -51,10 +62,13 @@
                 
             </div>
             <div id="show-button-group" class="display-flex">
-                <a id="direction" class="show-button" type="button" class="btn btn-primary" href="">
+                <!-- <a id="direction" class="show-button" type="button" class="btn btn-primary" href="">
                     Get Direction
-                </a>
-                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onClick="onRenderSchedule(court.bookings)">
+                </a> -->
+                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                    Get Direction
+                </button>
+                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                     Book Now
                 </button>
                 
@@ -151,10 +165,6 @@
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const court = <%- JSON.stringify(court) %>;
-</script>
-
-<script>
-
 </script>
 
 <script src="/javascripts/showPageMap.js"></script>

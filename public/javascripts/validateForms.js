@@ -17,3 +17,14 @@
             }, false)
         })
 })()
+
+// function addHrefToDirection(court) {
+//     const direction = document.getElementById("direction");
+//     console.log(direction)
+//     direction.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
+// }
+
+// document.getElementById("click").onClick = function() {
+//     var link = document.getElementById("direction");
+//     link.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
+// }

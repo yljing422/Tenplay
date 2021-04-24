@@ -214,6 +214,10 @@
     margin: 0;
 }
 
+#direction {
+    text-align: center;
+}
+
 #show-button-group {
     flex-direction: column;
     align-content: flex-end;

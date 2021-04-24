@@ -5,14 +5,14 @@
             <!-- hit endpoint - app.post('/tenniscourts', async (req, res) => {} -->
             <form action="/tenniscourts" method="POST" novalidate class="validated-form">
                 <div class="mb-3">
-                    <label class="form-label" for="name">Name</label>
+                    <label class="form-label" for="name">Name*</label>
                     <input class="form-control" type="text" id="name" name="tenniscourt[name]" required>
                     <div class="valid-feedback">
                         Look good!
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="street">Street</label>
+                    <label class="form-label" for="street">Street*</label>
                     <input class="form-control" type="text" id="street" name="tenniscourt[street]" required>
                     <div class="valid-feedback">
                         Look good!
@@ -20,21 +20,21 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-4">
-                        <label class="form-label" for="city">City</label>
+                        <label class="form-label" for="city">City*</label>
                         <input class="form-control" type="text" id="city" name="tenniscourt[city]" required>
                         <div class="valid-feedback">
                             Look good!
                         </div>
                     </div>
                     <div class="col-4">
-                        <label class="form-label" for="state">State</label>
+                        <label class="form-label" for="state">State*</label>
                         <input class="form-control" type="text" id="state" name="tenniscourt[state]" required>
                         <div class="valid-feedback">
                             Look good!
                         </div>
                     </div>
                     <div class="col-4">
-                        <label class="form-label" for="zipcode">Zipcode</label>
+                        <label class="form-label" for="zipcode">Zipcode*</label>
                         <input class="form-control" type="text" id="zipcode" name="tenniscourt[zipcode]" required>
                         <div class="valid-feedback">
                             Look good!
@@ -43,14 +43,14 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-6">
-                        <label class="form-label" for="courtNum">Court Number</label>
+                        <label class="form-label" for="courtNum">Court Number*</label>
                         <input class="form-control" type="number" id="courtNum" name="tenniscourt[courtNum]" required>
                         <div class="valid-feedback">
                             Look good!
                         </div>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" for="light">Light</label>
+                        <label class="form-label" for="light">Light*</label>
                         <select class="form-select" id="light" name="tenniscourt[light]">
                             <option value="No" selected>No</option>
                             <option value="Yes">Yes</option>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-6">
-                        <label class="form-label" for="startTime">Start Time (AM)</label>
+                        <label class="form-label" for="startTime">Start Time (AM)*</label>
                         <select class="form-select" id="startTime" name="tenniscourt[startTime]">
                             <option value="8AM">8</option>
                             <option value="9AM" selected>9</option>
@@ -68,7 +68,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" for="endTime">End Time (PM)</label>
+                        <label class="form-label" for="endTime">End Time (PM)*</label>
                         <select class="form-select" id="endTime" name="tenniscourt[endTime]">
                             <option value="4PM">4</option>
                             <option value="5PM">5</option>

@@ -56,19 +56,19 @@
                         <strong>Address: </strong>
                         <%= court.street %>, <%= court.city %>, <%= court.state %> <%= court.zipcode %>
                     </p>
-                    <p id="court-hour"><strong>Hours: </strong>7AM-PM</p>
+                    <p id="court-hour"><strong>Hours: </strong>7:00 AM-8:00 PM</p>
                     <p><strong>Court Number: </strong><%= court.courtNum %></p>
                 </div>
                 
             </div>
             <div id="show-button-group" class="display-flex">
-                <!-- <a id="direction" class="show-button" type="button" class="btn btn-primary" href="">
+                <a id="direction" class="show-button" type="button" class="btn btn-primary" href="">
                     Get Direction
-                </a> -->
-                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                </a>
+                <!-- <button id="direction" class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                     Get Direction
-                </button>
-                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                </button> -->
+                <button class="show-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onClick="onRenderSchedule(court.bookings)">
                     Book Now
                 </button>
                 
@@ -162,6 +162,20 @@
 
 
 
+<script>
+    function addHrefToDirection(court) {
+        const direction = document.getElementById("direction");
+        console.log(direction)
+        direction.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
+    }
+
+    // document.getElementById("click").onClick = function() {
+    //     var link = document.getElementById("direction");
+    //     link.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
+    // }
+
+
+</script>
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const court = <%- JSON.stringify(court) %>;

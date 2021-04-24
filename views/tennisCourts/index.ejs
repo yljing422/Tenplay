@@ -79,8 +79,8 @@
                         </small>
                     </p>
                     <div class='index-button'>
-                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">Book Now</a>
-                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>">View More</a>
+                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>" onClick="addHrefToDirection(court)">Book Now</a>
+                        <a class="btn btn-primary show-court-button" href="/tenniscourts/<%= court._id %>" onClick="addHrefToDirection(court)">View More</a>
                     </div>
                 </div>
             </div>
@@ -94,18 +94,5 @@
     const tennisCourts = { features: <%- JSON.stringify(tennisCourts) %> };
 </script>
 
-<!-- <script>
-    function addHrefToDirection() {
-        const direction = document.getElementById("direction");
-        direction.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
-    }
-
-    document.getElementById("click").onClick = function() {
-        var link = document.getElementById("direction");
-        link.setAttribute("href", `https://www.google.com/maps/place/${court.name},+${court.city},+${court.state}`);
-    }
-
-
-</script> -->
 
 <script src="/javascripts/clusterMap.js"></script>
